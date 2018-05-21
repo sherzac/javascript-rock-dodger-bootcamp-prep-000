@@ -95,6 +95,12 @@ window.requestAnimationFrame(moveRock);
  * Finally, alert "YOU LOSE!" to the player.
  */
 function endGame() {
+  clearInterval(gameInterval);
+  ROCKS.forEach(function (rock) {
+    rock.remove();
+  });
+  document.removeEventListener('keydown', moveDodger);
+  alert("YOU LOSE!")
 }
 
 function moveDodger(e) {
@@ -106,6 +112,15 @@ function moveDodger(e) {
    * we've declared for you above.)
    * And be sure to use the functions declared below!
    */
+   if (e.which === LEFT_ARROW) {
+     e.preventDefault();
+     e.stopPropagation();
+     moveDodgerLeft();
+   } else if (e.which === RIGHT_ARROW) {
+     e.preventDefault();
+     e.stopPropagation();
+     moveDodgerRight();
+   }
 }
 
 function moveDodgerLeft() {
